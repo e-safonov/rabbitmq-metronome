@@ -13,5 +13,5 @@
 /plugins.lock
 /sbin/
 /sbin.lock
-
-/rabbitmq_metronome.d
+/rabbitmq_metronome.d/
+.idea/
