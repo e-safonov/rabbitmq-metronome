@@ -1,4 +1,11 @@
-This is a very simple example plugin. See the RabbitMQ plugin
-development guide:
+This is very simple realisation of Mosquitto $SYS/broker/uptime function.
 
-http://www.rabbitmq.com/plugin-development.html
+Commands:
+for create .ez file
+make dist
+
+Requirements:
+https://github.com/emqx/emqtt.git
+
+Help pages:
+https://www.rabbitmq.com/plugin-development.html
