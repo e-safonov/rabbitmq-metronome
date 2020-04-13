@@ -4,8 +4,9 @@ PROJECT_MOD = rabbit_metronome
 
 define PROJECT_ENV
 [
-	    {exchange, <<"metronome">>}
-	  ]
+    {exchange, <<"amq.topic">>},
+    {routing_key, <<"$SYS.broker.uptime">>}
+]
 endef
 
 DEPS = rabbit_common rabbit amqp_client

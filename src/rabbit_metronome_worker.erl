@@ -43,12 +43,12 @@ handle_cast(Msg, #state{channel = undefined} = State) ->
     end;
 handle_cast(fire, State = #state{channel = Channel, exchange = Exchange}) ->
     Properties = #'P_basic'{content_type = <<"text/plain">>, delivery_mode = 1},
-    {Date={Year,Month,Day},{Hour, Min,Sec}} = erlang:universaltime(),
-    DayOfWeek = calendar:day_of_the_week(Date),
-    RoutingKey = list_to_binary(
-                   io_lib:format(?RKFormat, [Year, Month, Day,
-                                             DayOfWeek, Hour, Min, Sec])),
-    Message = RoutingKey,
+
+    %% Custom section for broker uptime.
+    {UpTime, _} = erlang:statistics(wall_clock),
+    {ok, RoutingKey} = application:get_env(rabbitmq_metronome, routing_key),
+    Message = list_to_binary(integer_to_list(UpTime div 1000) ++ <<" seconds">>),
+
     BasicPublish = #'basic.publish'{exchange = Exchange,
                                     routing_key = RoutingKey},
     Content = #amqp_msg{props = Properties, payload = Message},
